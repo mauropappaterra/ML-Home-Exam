@@ -1,11 +1,11 @@
 # Home Exam Machine Learning
-# dendogram.py
+# dendrogram.py
 # Created by Mauro J. Pappaterra on 14 of May 2019.
 import sonarmini as data
 import math
 
 def point2point (a, b):
-    """Given two 2D coordinate points A and B it calculates the Eucledian distance"""
+    """Given two 2D coordinate points A and B it calculates the Euclidian distance"""
     distance = math.sqrt(((a[0] - b[0])**2 + (a[1] - b[1])**2))
     # print ("Distance " + str(a) + " and " + str(b) + " = " + str(round(distance,5)))
     return round(distance,5)
@@ -45,7 +45,7 @@ def isCluster (element):
     return (str(type(element)) == "<class 'list'>")
 
 def findShortest (setpoints):
-    """Given a setpoint that might or might not contain any clusters, return shortest path in Eucledian distance"""
+    """Given a setpoint that might or might not contain any clusters, return shortest path in Euclidian distance"""
     distances = []
 
     for i,point in enumerate(setpoints[:len(setpoints)-1]):
@@ -75,26 +75,26 @@ def findShortest (setpoints):
 
     return sorted(distances, key=lambda i: i['distance'])[0]
 
-def dendogram (setpoints):
+def dendrogram (setpoints):
 
     iterations = 1
 
     while( len(setpoints) != 1):
 
-        print("Dendogram -> " + str(setpoints))
+        print("Dendrogram -> " + str(setpoints))
 
         print("\nITERATION no." + str(iterations))
 
         new_cluster = findShortest(setpoints)
-        print("Shortest path -> " + str(setpoints[new_cluster['from']]) + " to " + str(setpoints[new_cluster['to']]) + " with Eucledian distance = " + str(new_cluster['distance']) )
+        print("Shortest path -> " + str(setpoints[new_cluster['from']]) + " to " + str(setpoints[new_cluster['to']]) + " with Euclidian distance = " + str(new_cluster['distance']) )
 
         setpoints.append([setpoints.pop(new_cluster['to']),setpoints.pop(new_cluster['from'])])
         iterations +=1
 
-    print("\nFinal Dendogram -> " + str(setpoints))
+    print("\nFinal Dendrogram -> " + str(setpoints))
 
 
 # FOR TESTING PURPOSES
-#dendogram([(1,2),(2,1),(5,4),(7,5)])
+#dendrogram([(1,2),(2,1),(5,4),(7,5)])
 
-dendogram(data.sonarmini_short)
+dendrogram(data.sonarmini_short)
