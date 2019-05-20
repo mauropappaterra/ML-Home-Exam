@@ -5,54 +5,60 @@ import sonarmini as data
 import math
 
 def average (data):
-    """Given a dataset, calculates the average value """
+    """Given a dataset, calculates and returns the average value """
     total = 0
     for n in data:
         total += n
 
     return round(total / len(data),5)
 
-def standardDeviation (data, mu, bias = False):
-    """Given a dataset and an average value, calculates the standard unbias/bias deviation"""
+def standardDeviation (data, mu, biased = False):
+    """Given a dataset and an average value, calculates and returns the standard
+    unbiased/biased deviation"""
     sum = 0
 
     for value in data:
         sum += (value - mu)**2
 
-    if (bias):
-        divisor = len(data)
+    if (biased):
+        divisor = len(data) # biased
     else:
-        divisor = (len(data) - 1)
+        divisor = (len(data) - 1) # unbiased (default)
 
-    result = sum / divisor
-    result = math.sqrt(result)
+    result = math.sqrt(sum / divisor)
 
     return round(result,5)
 
-def mxl (data):
-    mu = average(data)
-    sigma = standardDeviation(data, mu)
-    sigma_bias =  standardDeviation(data, mu, True)
-    #print(mu)
-    #print(sigma)
-
-    maxs = 1
+def mle (data, mu, sigma):
+    """Given a dataset mu and sigma, returns the Maximum Likelihood Estimator (MLE)"""
+    results = []
 
     for x in data:
-        power = -1/2 * ((x - mu)/(sigma))**2
-        result = ((1 / (sigma * math.sqrt(2*math.pi)))* math.e)** power
-
-        maxs *= result
-
-        print (result)
-
-        print ( "MAX: " + str(round(maxs,5)))
-    return 0
-    #return p ** xi * (1 - p) ** (1 - xi)
+        power = -1 / 2 * ((x - mu) / (sigma)) ** 2
+        result = ((1 / (sigma * math.sqrt(2 * math.pi))) * math.e) ** power
+        results.append(round(result,5))
+    #print(results)
+    return max(results)
 
 def absolutDiff (a, b):
-    return abs(a - b)
+    """Given two values a and b returns the absolute difference"""
+    return round(abs(a - b),5)
 
-mxl (data.sonarmini_x)
+def main (data):
+    mu = average(data)
+    sigma = standardDeviation(data, mu)
+    sigma_biased =  standardDeviation(data, mu, True)
 
+    #print(mu)
+    #print(sigma)
+    #print(sigma_biased)
 
+    mle_unbiased = mle(data,mu,sigma)
+    mle_biased = mle(data,mu,sigma_biased)
+
+    print("MLE Biased: " + str(mle_biased))
+    print("MLE Unbiased: " + str(mle_unbiased))
+
+    print("\nAbsolute Difference: " + str(absolutDiff(mle_biased, mle_unbiased)))
+
+main (data.sonarmini_x)
