@@ -27,4 +27,4 @@ def closest3 (dataset, index):
     for res in sort:
         print (str(res['coordinate']) + " Manhattan Distance: " + str(res['distance']))
 
-closest3(data.sonarmini, 4)
+closest3(data.sonarmini_x_y, 4)

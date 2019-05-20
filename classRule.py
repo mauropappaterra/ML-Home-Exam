@@ -29,4 +29,4 @@ def classRule (dataset):
     print ("\nCORRECT CLASSIFICATIONS: " + str(correct))
     print("INCORRECT CLASSIFICATIONS: " + str(incorrect))
 
-classRule(data.sonarmini_class)
+classRule(data.sonarmini_x_y_z)

@@ -93,8 +93,7 @@ def dendrogram (setpoints):
 
     print("\nFinal Dendrogram -> " + str(setpoints))
 
-
 # FOR TESTING PURPOSES
 #dendrogram([(1,2),(2,1),(5,4),(7,5)])
 
-dendrogram(data.sonarmini_short)
+dendrogram(data.sonarmini_6_10)

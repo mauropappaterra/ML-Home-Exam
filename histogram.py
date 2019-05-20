@@ -55,8 +55,8 @@ def histogram_x2 (data):
 
     return np.array([bin_1, bin_2, bin_3])
 
-x1 = histogram_x1(data.sonarmini)
-x2 = histogram_x2(data.sonarmini)
+x1 = histogram_x1(data.sonarmini_x_y)
+x2 = histogram_x2(data.sonarmini_x_y)
 
 plt.hist2d(x1, x2, bins=3)
 plt.show()
