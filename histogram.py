@@ -1,7 +1,9 @@
 # Python
 # histogram.py
 # Created by Mauro J. Pappaterra on 14 of May 2019.
+import matplotlib.pyplot as plt
 import sonarmini as data
+import numpy as np
 
 def histogram_x1 (data):
     bin_1 = 0
@@ -26,6 +28,8 @@ def histogram_x1 (data):
     print("0.05001 to 0.10000 " + "|" * bin_2)
     print("0.10001 to 0.15000 " + "|" * bin_3)
 
+    return np.array([bin_1, bin_2, bin_3])
+
 def histogram_x2 (data):
     bin_1 = 0
     bin_2 = 0
@@ -49,5 +53,10 @@ def histogram_x2 (data):
     print("0.08001 to 0.16000 -" + "|" * bin_2)
     print("0.16001 to 0.24000 -" + "|" * bin_3)
 
-histogram_x1(data.sonarmini)
-histogram_x2(data.sonarmini)
+    return np.array([bin_1, bin_2, bin_3])
+
+x1 = histogram_x1(data.sonarmini)
+x2 = histogram_x2(data.sonarmini)
+
+plt.hist2d(x1, x2, bins=3)
+plt.show()
